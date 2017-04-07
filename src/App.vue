@@ -47,10 +47,11 @@
             <h4 class="modal-title">Sign Up</h4>
           </div>
           <div class="modal-body">
-            <p>Some text in the modal.</p>
+            <div class="g-signin2 googlelogin" data-onsuccess="onSignIn"></div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Sign Up</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>
@@ -67,10 +68,11 @@
             <h4 class="modal-title">Login</h4>
           </div>
           <div class="modal-body">
-            <p>Some text in the modal.</p>
+            <div class="g-signin2 googlelogin" data-onsuccess="onSignIn"></div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Login</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>

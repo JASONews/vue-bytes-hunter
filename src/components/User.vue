@@ -7,9 +7,9 @@
               <br>
               <div class="row">
                   <!-- Level of difficulty-->
-                  <div class="thumbnail">
+                  <div id="app-user-info" class="thumbnail">
                       <img src="https://storage.googleapis.com/bytehunter_images/hongyang.png" alt="hongyang">
-                      <p>HongYang Zheng</p>
+                      <p>{{uname}}</p>
                   </div>
               </div>
 
@@ -32,7 +32,25 @@
   </div>
 </template>
 
-<script></script>
+<script>
+  var host = "localhost:8080"
+  var userInfo = new Vue({
+    el: '#app-user-info',
+    data: {
+      info: [
+        
+      ]
+    },
+    ready: function() {
+      this.$http.get(host+'/user/profile', function(data) {
+        this.$set('info', data)
+        this.$set('uname', info[preferredName])
+      }).error(function(data, status, request) {
+
+      })
+    }
+  })
+</script>
 
 <style>
 body { 
