@@ -9,7 +9,7 @@
                   <!-- Level of difficulty-->
                   <div id="app-user-info" class="thumbnail">
                       <img src="https://storage.googleapis.com/bytehunter_images/hongyang.png" alt="hongyang">
-                      <p>{{uname}}</p>
+                      <p id="displayname">{{preferredName}}</p>
                   </div>
               </div>
 
@@ -32,29 +32,40 @@
   </div>
 </template>
 
-<script>
-  var host = "localhost:8080"
-  var userInfo = new Vue({
-    el: '#app-user-info',
-    data: {
-      info: [
-        
-      ]
-    },
-    ready: function() {
-      this.$http.get(host+'/user/profile', function(data) {
-        this.$set('info', data)
-        this.$set('uname', info[preferredName])
-      }).error(function(data, status, request) {
-
-      })
+<script type="text/javascript">
+export default {
+  data () {
+    return {
+      googleid: '',
+      email: "",
+      preferredName: "",
+      lastTimeLogin: "",
+      score: 0
     }
-  })
+  },
+  mounted: function() {
+      this.$http.get('https://storage.googleapis.com/bytehunter_images/userinfo.json').then(response => {
+        return response.json();
+      }).then(json => {
+        this.googleid = json.googleid;
+        this.email = json.email;
+        this.preferredName = json.preferredName;
+        this.lastTimeLogin = json.lastTimeLogin;
+        this.score = json.score;
+      })
+  }
+}
 </script>
 
 <style>
 body { 
   padding-top: 50px; 
+}
+
+#displayname {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .timeline {
