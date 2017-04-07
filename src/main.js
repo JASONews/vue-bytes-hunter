@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue 			from 'vue'
 import App 			from './App'
+import Game 		from './components/Game'
 import Home 		from './components/Home'
 import Ranking		from './components/Ranking'
 import GameList		from './components/GameList'
@@ -20,6 +21,7 @@ const router = new VueRouter({
 		{ path: '/ranking', component: Ranking},
 		{ path: '/game-list', component: GameList},
 		{ path: '/user-page', component: User},
+		{ path: '/game', component: Game},
 		{ path: '*', redirect: '/home'}
 	],
 	mode: 'history' 

@@ -47,86 +47,27 @@
                             </thead>
 
                             <tbody>
-                            <tr v-for="(item, index) in items">
+                            <tr v-for="(item, index) in items" v-if="index === 0" class="success">
                                 <td>{{index + 1}}</td>
                                 <td>{{item.name}}</td>
                                 <td>{{item.score}}</td>
                             </tr>
-                            <tr class="success">
-                                <td>1</td>
-                                <td>John Doe</td>
-                                <td>124322</td>
+                            <tr v-for="(item, index) in items" v-if="index === 1" class="danger">
+                                <td>{{index + 1}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.score}}</td>
                             </tr>
-                            <tr class="danger">
-                                <td>2</td>
-                                <td>John Doe</td>
-                                <td>114245</td>
+                            <tr v-for="(item, index) in items" v-if="index === 2" class="info">
+                                <td>{{index + 1}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.score}}</td>
                             </tr>
-                            <tr class="info">
-                                <td>3</td>
-                                <td>John Doe</td>
-                                <td>102244</td>
+                            <tr v-for="(item, index) in items" v-if="index > 2">
+                                <td>{{index + 1}}</td>
+                                <td>{{item.name}}</td>
+                                <td>{{item.score}}</td>
                             </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>John Doe</td>
-                                <td>124322</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>John Doe</td>
-                                <td>114245</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>John Doe</td>
-                                <td>102244</td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>John Doe</td>
-                                <td>124322</td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>John Doe</td>
-                                <td>114245</td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>John Doe</td>
-                                <td>102244</td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>John Doe</td>
-                                <td>124322</td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>John Doe</td>
-                                <td>114245</td>
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td>John Doe</td>
-                                <td>102244</td>
-                            </tr>
-                            <tr>
-                                <td>13</td>
-                                <td>John Doe</td>
-                                <td>124322</td>
-                            </tr>
-                            <tr>
-                                <td>14</td>
-                                <td>John Doe</td>
-                                <td>114245</td>
-                            </tr>
-                            <tr>
-                                <td>15</td>
-                                <td>John Doe</td>
-                                <td>102244</td>
-                            </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -143,16 +84,8 @@ export default {
       rankType: '',
       items: [
         {
-            name: 'u1',
-            score: 1231
-        },
-        {
-            name: 'u2',
-            score: 32
-        },
-        {
-            name: 'u3',
-            score: 1
+            name: '',
+            score: 0
         }
       ]
     }
