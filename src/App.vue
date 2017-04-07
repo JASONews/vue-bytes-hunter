@@ -8,11 +8,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Bytes Hunter</a>
+            <router-link tag="a" to="/" class="navbar-brand">Bytes Hunter</router-link>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-left">
-                <router-link tag="li" to="/about"><a>ABOUT</a></router-link>
                 <router-link tag="li" to="/game-list"><a>GAMES</a></router-link>
                 <router-link tag="li" to="/ranking"><a>RANKING</a></router-link>
             </ul>
@@ -23,8 +22,9 @@
                 <button type="submit" class="btn btn-default">Search</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a data-toggle="modal" data-target="#signupModal">Sign Up</a></li>
-                <li><a data-toggle="modal" data-target="#loginModal">login</a></li>
+                <!-- <li><a data-toggle="modal" data-target="#signupModal">Sign Up</a></li> -->
+
+                <li><a href="#" data-toggle="modal" data-target="#loginModal"><i class="fa fa-google-plus-square icon" aria-hidden="true"></i>Google login</a></li>
                 <router-link tag="li" to="/user-page"><a><span class="glyphicon glyphicon-user"></span></a></router-link>
             </ul>
         </div>
@@ -37,11 +37,11 @@
     </div>
 
     <!-- Modal -->
-    <div id="signupModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
+    <!-- <div id="signupModal" class="modal fade" role="dialog">
+      <div class="modal-dialog"> -->
 
         <!-- Modal content-->
-        <div class="modal-content">
+        <!-- <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Sign Up</h4>
@@ -55,7 +55,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Modal -->
     <div id="loginModal" class="modal fade" role="dialog">
@@ -71,22 +71,13 @@
             <div class="g-signin2 googlelogin" data-onsuccess="onSignIn"></div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Login</button>
+            <button type="button" onclick="login()" class="btn btn-default">Login</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           </div>
         </div>
       </div>
     </div>
-
   </div>
+
 </template>
-
-<script>
-</script>
-
-
-<style>
-body { 
-  padding-top: 50px; 
-}
-</style>
+  <script type="text/javascript" src="./login.js" ></script>

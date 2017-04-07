@@ -4,17 +4,16 @@
 			<div class="col-sm-2">
 				<!-- lists -->
 				<br>
-				<br>	
+				<br>
 				<div class="row">
 					<!-- Level of difficulty-->
 					<h3>Level</h3>
 					<div class="list-group">
 						<a href="#" class="list-group-item">Normal<span class="badge">6</span></a>
-						<a href="#" class="list-group-item">Medium<span class="badge">4</span></a>
 						<a href="#" class="list-group-item">Hard<span class="badge">3</span></a>
 						<a href="#" class="list-group-item">Insame<span class="badge">7</span></a>
 					</div>
-				</div> 
+				</div>
 
 				<div class="row">
 					<!-- Category -->
@@ -24,7 +23,7 @@
 						<a href="#" class="list-group-item">Data Structures<span class="badge">4</span></a>
 						<a href="#" class="list-group-item">Algorithms<span class="badge">3</span></a>
 						<a href="#" class="list-group-item">Logics<span class="badge">7</span></a>
-						<a href="#" class="list-group-item">Memory<span class="badge">2</span></a>
+						<a href="#" class="list-group-item">Theory<span class="badge">2</span></a>
 					</div>
 				</div>
 			</div>
@@ -77,16 +76,7 @@
 						</div>
 					</div>
 				</div>
-			</div> 
+			</div>
 		</div>
 	</div>
 </template>
-
-<script>
-</script>
-
-<style>
-body { 
-  padding-top: 50px; 
-}
-</style>

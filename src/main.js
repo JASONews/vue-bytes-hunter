@@ -10,6 +10,8 @@ import User			from './components/User'
 import VueRouter 	from 'vue-router'
 import VueResource 	from 'vue-resource'
 
+import cssByteHunter from "./css/byteHunter.css"
+
 Vue.use(VueResource)
 Vue.use(VueRouter)
 
@@ -22,7 +24,7 @@ const router = new VueRouter({
 		{ path: '/user-page', component: User},
 		{ path: '*', redirect: '/home'}
 	],
-	mode: 'history' 
+	mode: 'history'
 })
 
 var bus = new Vue({});

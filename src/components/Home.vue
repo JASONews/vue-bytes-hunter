@@ -34,20 +34,10 @@
 </div>
 </template>
 
-<script></script>
-
-<style>
-body { 
-  padding-top: 50px; 
+<script type="text/javascript">
+console.log("loaded login js");
+function login() {
+  console.log("clicked");
+  $(".loginBtn")[0].click();
 }
-
-.jumbotron {
-  padding: 100px 25px;
-  background-color: black;
-  color: #ffffff;
-}
-
-#welcome-col {
-  background-color: gray;
-}
-</style>
+</script>

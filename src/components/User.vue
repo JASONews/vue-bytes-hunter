@@ -56,21 +56,3 @@ export default {
   }
 }
 </script>
-
-<style>
-body { 
-  padding-top: 50px; 
-}
-
-#displayname {
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.timeline {
-  padding-left: 80px;
-  height: 1000px;
-  width: auto;
-}
-</style>
