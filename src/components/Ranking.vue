@@ -9,22 +9,9 @@
                     <!-- Level of difficulty-->
                     <h3>Level</h3>
                     <div class="list-group">
-                        <a href="#" class="list-group-item">Normal<span class="badge">6</span></a>
-                        <a href="#" class="list-group-item">Medium<span class="badge">4</span></a>
-                        <a href="#" class="list-group-item">Hard<span class="badge">3</span></a>
-                        <a href="#" class="list-group-item">Insame<span class="badge">7</span></a>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <!-- Category -->
-                    <h3>Category</h3>
-                    <div class="list-group">
-                        <a href="#" class="list-group-item">Types<span class="badge">6</span></a>
-                        <a href="#" class="list-group-item">Data Structures<span class="badge">4</span></a>
-                        <a href="#" class="list-group-item">Algorithms<span class="badge">3</span></a>
-                        <a href="#" class="list-group-item">Logics<span class="badge">7</span></a>
-                        <a href="#" class="list-group-item">Memory<span class="badge">2</span></a>
+                        <a href="#" id="normalMode" class="list-group-item">Normal</a>
+                        <a href="#" id="hardMode" class="list-group-item">Hard</a>
+                        <a href="#" id="insaneMode" class="list-group-item">Insame</a>
                     </div>
                 </div>
             </div>
@@ -77,41 +64,4 @@
     </div>
 </template>
 
-<script type="text/javascript">
-export default {
-  data () {
-    return {
-      rankType: '',
-      items: [
-        {
-            name: '',
-            score: 0
-        }
-      ]
-    }
-  },
-  mounted: function() {
-      this.$http.get('https://storage.googleapis.com/bytehunter_images/rank-normal.json').then(response => {
-        return response.json();
-      }).then(json => {
-        this.rankType = json.for;
-        this.items = json.list;
-      })
-  }
-}
-</script>
-
-<style>
-body { 
-  padding-top: 50px; 
-}
-
-.rank-list {
-    padding-left: 15px;
-    text-align: center;
-}
-
-.table th {
-    text-align: center;
-}
-</style>
+<script src="../js/ranking.js"></script>

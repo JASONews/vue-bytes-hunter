@@ -8,11 +8,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Bytes Hunter</a>
+            <router-link tag="a" to="/" class="navbar-brand">Bytes Hunter</router-link>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-left">
-                <router-link tag="li" to="/about"><a>ABOUT</a></router-link>
                 <router-link tag="li" to="/game-list"><a>GAMES</a></router-link>
                 <router-link tag="li" to="/ranking"><a>RANKING</a></router-link>
             </ul>
@@ -23,12 +22,14 @@
                 <button type="submit" class="btn btn-default">Search</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" data-toggle="modal" data-target="#loginModal"><i class="fa fa-google-plus-square icon" aria-hidden="true"></i>Google login</a></li>
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <router-link tag="li" to="/user-page"><a>Profile</a></router-link>
+                        <router-link tag="li" to="/user-profile"><a>Profile</a></router-link>
                         <router-link tag="li" to="/user-page"><a>Help</a></router-link>
-                        <li><a data-toggle="modal" data-target="#signupModal">Setting</a></li>
+                        <router-link tag="li" to="/user-settings"><a>Settings</a></router-link>
                         <li class="divider"></li>
+                        <li><a data-toggle="modal" data-target="#loginModal">Log In</a></li>
                         <li><a data-toggle="modal" data-target="#signoutModal">Sign Out</a></li>
                     </ul>
                 </li>
@@ -77,7 +78,7 @@
             <div class="g-signin2 googlelogin" data-onsuccess="onSignIn"></div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Login</button>
+            <button type="button" class="btn btn-default" onclick="login()">Login</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           </div>
         </div>
@@ -108,12 +109,4 @@
   </div>
 </template>
 
-<script>
-</script>
-
-
-<style>
-body { 
-  padding-top: 50px; 
-}
-</style>
+<script></script>
