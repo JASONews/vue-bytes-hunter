@@ -2,15 +2,16 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue 			from 'vue'
 import App 			from './App'
+import Game 		from './components/Game'
 import Home 		from './components/Home'
 import Ranking		from './components/Ranking'
 import GameList		from './components/GameList'
-import User			from './components/User'
+import UserProfile	from './components/UserProfile'
+import UserSettings from './components/UserSettings'
+import mainCSS		from './CSS/bytes-hunter.css'
 
 import VueRouter 	from 'vue-router'
 import VueResource 	from 'vue-resource'
-
-import cssByteHunter from "./css/byteHunter.css"
 
 Vue.use(VueResource)
 Vue.use(VueRouter)
@@ -21,7 +22,9 @@ const router = new VueRouter({
 		{ path: '/home', component: Home},
 		{ path: '/ranking', component: Ranking},
 		{ path: '/game-list', component: GameList},
-		{ path: '/user-page', component: User},
+		{ path: '/user-profile', component: UserProfile},
+		{ path: '/user-settings', component: UserSettings},
+		{ path: '/game', component: Game},
 		{ path: '*', redirect: '/home'}
 	],
 	mode: 'history'

@@ -1,0 +1,60 @@
+body { 
+	padding-top: 50px; 
+}
+
+/* Home */
+.jumbotron {
+	padding: 100px 25px;
+	background-color: black;
+	color: #ffffff;
+}
+
+#welcome-col {
+	background-color: gray;
+}
+
+/* User Profile */
+#displayname {
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#timeline-text {
+	text-align: center;
+	font-family: 'Spirax', cursive;
+}
+
+.card {
+	width: 90rem;
+	border-style: solid;
+	border-width: 3px;
+	border-color: lightgrey;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+
+.card-block {
+	padding-left: 10px;
+}
+
+.card-title {
+	font-size: 30px;
+}
+
+.card-img-top {
+	width: 90rem;
+	height: auto;
+}
+
+/* ranking */
+
+.rank-list {
+    padding-left: 15px;
+    text-align: center;
+}
+
+.table th {
+    text-align: center;
+}
