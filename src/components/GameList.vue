@@ -36,7 +36,10 @@
 				<h2>Games</h2>
 				<h5>Choose a Category</h5>
 				<div class="row text-center">
-					<div class="col-sm-4">
+
+
+					<search-card v-for="game in games" :game-src="'/game/'+game.url" :game-title="game.title" :thumbnail-src="game.thumbnail"></search-card>
+					<!-- <div class="col-sm-4">
 						<div class="thumbnail">
 							<router-link to="/game">
 								<a>
@@ -45,22 +48,22 @@
 								</a>
 							</router-link>
 						</div>
-					</div>
-					<div class="col-sm-4">
+					</div> -->
+					<!-- <div class="col-sm-4">
 						<div class="thumbnail">
 							<img src="https://storage.googleapis.com/bytehunter_images/02-click-on-an-image.jpg" alt="click image">
 							<p>Click Image</p>
 						</div>
-					</div>
-					<div class="col-sm-4">
+					</div> -->
+					<!-- <div class="col-sm-4">
 						<div class="thumbnail">
 							<img src="https://storage.googleapis.com/bytehunter_images/fire-rate.jpg" alt="Fire Rate">
 							<p>Fire Rate</p>
 						</div>
-					</div>
+					</div> -->
 				</div>
 
-				<div class="row text-center">
+				<!-- <div class="row text-center">
 					<div class="col-sm-4">
 						<div class="thumbnail">
 							<img src="https://storage.googleapis.com/bytehunter_images/protracker.jpg" alt="protracker">
@@ -79,8 +82,38 @@
 							<p>Filters</p>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
 </template>
+
+<script type="text/javascript">
+	import searchCard from "./searchCard";
+
+	module.exports = {
+		components: {
+			searchCard
+		},
+
+		props: ['name'],
+
+		data: function () {
+			return {
+				games: []
+			};
+		},
+
+		mounted: function () {
+			for (var i =0; i < 10; i++) {
+				var n = "game "+i;
+				if (this.name == "*" || n.match(".*"+this.name+".*"))
+					this.games.push({
+						title: "game "+i,
+						url: i,
+						thumbnail: "https://storage.googleapis.com/bytehunter_images/flood-fill.jpg"
+					})
+			}
+		}
+	};
+</script>

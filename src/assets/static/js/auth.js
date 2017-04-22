@@ -13,22 +13,23 @@ function onSignIn(googleUser) {
     // console.log("onSignIn");
     // var event = new CustomEvent('signinsuccess', { 'detail': googleUser });
     // document.dispatchEvent(event);
-    var profile = googleUser.getBasicProfile();
-    console.log(profile);
-    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-    console.log('Full Name: ' + profile.getName());
-    console.log('Given Name: ' + profile.getGivenName());
-    console.log('Family Name: ' + profile.getFamilyName());
-    console.log("Image URL: " + profile.getImageUrl());
-    console.log("Email: " + profile.getEmail());
-    userid = profile.getId()
-    // The ID token you need to pass to your backend:
-    var id_token = googleUser.getAuthResponse().id_token;
-    userid = profile.getId();
-    Cookies.remove("userid");
-    Cookies.set("userid", userid);
-    console.log("ID Token: " + id_token);
-    $("#toogleBtn").click();
+    // var profile = googleUser.getBasicProfile();
+    // console.log(profile);
+    // console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+    // console.log('Full Name: ' + profile.getName());
+    // console.log('Given Name: ' + profile.getGivenName());
+    // console.log('Family Name: ' + profile.getFamilyName());
+    // console.log("Image URL: " + profile.getImageUrl());
+    // console.log("Email: " + profile.getEmail());
+    // userid = profile.getId()
+    // // The ID token you need to pass to your backend:
+    // var id_token = googleUser.getAuthResponse().id_token;
+    // userid = profile.getId();
+    // Cookies.remove("userid");
+    // Cookies.set("userid", userid);
+    // console.log("ID Token: " + id_token);
+    window.googleUser = googleUser;
+    $("#toogleBtn").trigger("click");
     // $.post("/account/auth", {id_token: id_token}, function (res) {
     //     console.log(res);
     //     window.location = "/";

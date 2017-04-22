@@ -4,7 +4,7 @@
     <div class="container">
         <h2>Welcome to the World of Bytes Hunters</h2>
         <br/>
-        <h4><a v-bind:href="'/game-list'">Get Started</a></h4>
+        <h4><a href="/game/1">Get Started</a></h4>
     </div>
   </div>
 
