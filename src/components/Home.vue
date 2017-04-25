@@ -1,14 +1,15 @@
 <template>
 <div>
-  <div class="jumbotron text-center">
-    <div class="container">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container text-center">
         <h2>Welcome to the World of Bytes Hunters</h2>
         <br/>
-        <h4><a href="/game/1">Get Started</a></h4>
+        <div id="gameView"></div>
+        <!-- <h4><a href="/game/1">Get Started</a></h4> -->
     </div>
   </div>
 
-  <div class="container-fluid text-center bg-grey">
+  <!-- <div class="container-fluid text-center bg-grey">
     <h2>How does it work</h2>
     <div class="row text-center">
         <div class="col-sm-4">
@@ -30,6 +31,6 @@
             </div>
         </div>
     </div>
-  </div>
+  </div> -->
 </div>
 </template>

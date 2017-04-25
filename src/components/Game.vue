@@ -1,21 +1,31 @@
 <template>
-	<div>
+	<div class="container">
 		<div class="row">
-			<div id="gameView">
-			</div>
-			<img id="gameimg" src="https://storage.googleapis.com/bytehunter_images/game-img01.png" alt="flood-fill">
-		</div>
-		<label for="fav">fav</label>
-		<input type="checkbox" id='fav'>
-		<div class='row'>
-			<div class="btn-group">
-			  <a :href="prev" type="button" class="btn btn-default">Prev</a>
-			  <a :href="next" type="button" class="btn btn-default">Next</a>
+			<div class="col">
+				<div id="gameView">
+				</div>
 			</div>
 		</div>
+			<!-- <img id="gameimg" src="https://storage.googleapis.com/bytehunter_images/game-img01.png" alt="flood-fill"> -->
 		<div class="row">
-			<div id="disqus_thread"></div>
+			<div class="col">
+				<label for="fav">fav</label>
+				<input type="checkbox" id='fav'>
+				<div v-if="online" class='row'>
+					<div class="btn-group">
+						<router-link tag="a" :to="prev" type="button" class="btn btn-default">Prev</router-link>
+						<router-link tag="a" :to="next" type="button" class="btn btn-default">Next</router-link>
+					</div>
+				</div>
+			</div>
 		</div>
+
+		<div class="row">
+			<div class="col">
+				<div id="disqus_thread"></div>
+			</div>
+		</div>
+
 	</div>
 
 </template>
@@ -37,11 +47,11 @@ module.exports = {
 
 	data: function() {
 	 return {
-		 	disqus_config : function () {
-		    this.page.url = windows.location;  // Replace PAGE_URL with your page's canonical URL variable
-		    this.page.identifier = windows.location; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+		 	disqus_config: function() {
+		 		this.page.url= windows.location; // Replace PAGE_URL with your page's canonical URL variable
+		 		this.page.identifier= windows.location; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+		  }
 			}
-		};
 	},
 
 	computed: {
@@ -60,28 +70,38 @@ module.exports = {
 	},
 
 	methods: {
-		// online: function(){
-		// 	console.log(this.$root.user);
-		// 	return this.$root.user != null;
-		// }
+	},
+
+	watch: {
+		'$route' (to, from) {
+			console.log(to, from);
+			window.DISQUS.reset({
+			  reload: true,
+			  config: function () {
+			    // this.page.identifier = to.fullPath;
+			    // this.page.url = window.location.origin;
+			  }
+			});
+		}
 	},
 
 	mounted: function () {
 		var d = document, s = d.createElement('script');
 
-		s.src = 'https://bytehunter.disqus.com/embed.js';
+		s.src = '//bytehunter.disqus.com/embed.js';
 
 		s.setAttribute('data-timestamp', +new Date());
 		(d.head || d.body).appendChild(s);
+		// window.disqus_config = function() {
+			// window.page.url= windows.location.origin; // Replace PAGE_URL with your page's canonical URL variable
+			// window.page.identifier= windows.location.pathname; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	//  };
 	}
 };
 
 </script>
 
 <style>
-body {
-  padding-top: 50px;
-}
 
 #gameimg {
 	padding-top: 40px;

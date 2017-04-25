@@ -1,11 +1,9 @@
 <template>
   <div id="wrapper">
     <bh-nav></bh-nav>
-    <div class="container">
       <div>
         <router-view></router-view>
       </div>
-    </div>
     <!-- Modal -->
     <!-- <div id="loginModal" class="modal fade" role="dialog">
       <div class="modal-dialog"> -->
@@ -32,9 +30,17 @@
 
 <script>
 
+const axios = require('axios');
+
 import bhNav from './components/bhNav'
 
 module.exports = {
+  data: function () {
+    return {
+    }
+
+  },
+
   components: {
     bhNav
   },

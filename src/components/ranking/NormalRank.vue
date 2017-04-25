@@ -41,4 +41,4 @@
     </div>
 </template>
 
-<script src="../assets/static/js/ranking.js"></script>
+<script src="./ranking.js"></script>

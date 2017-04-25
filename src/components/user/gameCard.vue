@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="card mb-3">
-    <a :href="gameSrc">
+    <router-link tag="a" :to="gameSrc">
     <img class="card-img-top game-card-img" :src="thumbnailSrc" alt="Card image cap" width="100" height="100">
-  </a>
+  </router-link>
     <div class="card-block">
       <h4 class="card-title">{{gameTitle}}</h4>
       <p class="card-text"><small class="text-muted">Last updated {{lastUpdate}}</small></p>

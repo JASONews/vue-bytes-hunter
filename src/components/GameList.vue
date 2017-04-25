@@ -1,88 +1,35 @@
 <template>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-2">
+			<div class="col-3">
 				<!-- lists -->
 				<br>
 				<br>
 				<div class="row">
 					<!-- Level of difficulty-->
-					<h3>Level</h3>
-					<div class="list-group">
-						<a href="#" class="list-group-item">All<span class="badge">20</span></a>
-						<a href="#" class="list-group-item">Normal<span class="badge">6</span></a>
-						<a href="#" class="list-group-item">Hard<span class="badge">3</span></a>
-						<a href="#" class="list-group-item">Insame<span class="badge">7</span></a>
+					<div class="col">
+						<list-component :options="levelOptions" @selected="select" title="LEVEL"></list-component>
 					</div>
 				</div>
 
-				<div class="row">
+
+				<div class="row my-auto">
 					<!-- Category -->
-					<h3>Category</h3>
-					<div class="list-group">
-						<a href="#" class="list-group-item">All<span class="badge">20</span></a>
-						<a href="#" class="list-group-item">Types<span class="badge">6</span></a>
-						<a href="#" class="list-group-item">Data Structures<span class="badge">4</span></a>
-						<a href="#" class="list-group-item">Algorithms<span class="badge">3</span></a>
-						<a href="#" class="list-group-item">Logics<span class="badge">7</span></a>
-						<a href="#" class="list-group-item">Theory<span class="badge">2</span></a>
+					<div class="col">
+						<list-component :options="categoryOptions" @selected="select" title="CATEGORY"></list-component>
 					</div>
+
 				</div>
 			</div>
 
 
-			<div class="col-sm-10">
+			<div class="col-8">
 				<!-- Display thumbnails of games -->
 				<h2>Games</h2>
 				<h5>Choose a Category</h5>
 				<div class="row text-center">
-
-
-					<search-card v-for="game in games" :game-src="'/game/'+game.url" :game-title="game.title" :thumbnail-src="game.thumbnail"></search-card>
-					<!-- <div class="col-sm-4">
-						<div class="thumbnail">
-							<router-link to="/game">
-								<a>
-									<img src="https://storage.googleapis.com/bytehunter_images/flood-fill.jpg" alt="flood-fill">
-									<p>Flood Fill</p>
-								</a>
-							</router-link>
-						</div>
-					</div> -->
-					<!-- <div class="col-sm-4">
-						<div class="thumbnail">
-							<img src="https://storage.googleapis.com/bytehunter_images/02-click-on-an-image.jpg" alt="click image">
-							<p>Click Image</p>
-						</div>
-					</div> -->
-					<!-- <div class="col-sm-4">
-						<div class="thumbnail">
-							<img src="https://storage.googleapis.com/bytehunter_images/fire-rate.jpg" alt="Fire Rate">
-							<p>Fire Rate</p>
-						</div>
-					</div> -->
+					<search-card v-for="game in shown" :game-src="'/game/'+game.url" :game-title="game.title" :thumbnail-src="game.thumbnail"></search-card>
 				</div>
-
-				<!-- <div class="row text-center">
-					<div class="col-sm-4">
-						<div class="thumbnail">
-							<img src="https://storage.googleapis.com/bytehunter_images/protracker.jpg" alt="protracker">
-							<p>Protracker</p>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="thumbnail">
-							<img src="https://storage.googleapis.com/bytehunter_images/gen-paint.jpg" alt="create">
-							<p>Create</p>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="thumbnail">
-							<img src="https://storage.googleapis.com/bytehunter_images/spiral-galaxy.jpg" alt="filters">
-							<p>Filters</p>
-						</div>
-					</div>
-				</div> -->
 			</div>
 		</div>
 	</div>
@@ -90,29 +37,138 @@
 
 <script type="text/javascript">
 	import searchCard from "./searchCard";
+	import listComponent from "./listComponent";
 
 	module.exports = {
 		components: {
-			searchCard
+			searchCard,
+			listComponent
 		},
 
 		props: ['name'],
 
+		computed: {
+			shown: function () {
+				var showns = [];
+				for (var i =0; i < this.games.length; i++) {
+					if (this.name == "*" || this.games[i].title.match(".*"+this.name+".*")) {
+						showns.push(this.games[i]);
+					}
+				}
+				var self = this;
+				return showns.filter(function(e){
+					if (self.levelOptions[0].active) {
+						return true;
+					}
+					for (var i of self.levelOptions) {
+						if (i.active && e.level == i.name) {
+							return true;
+						}
+					}
+					return false;
+				}).filter(function (e) {
+					if (self.categoryOptions[0].active) {
+						return true;
+					}
+					for (var i of self.categoryOptions) {
+						if (i.active && e.categories.includes(i.name)) {
+							return true;
+						}
+					}
+					return false;
+				});
+			}
+		},
+
+		// watch: {
+		// 	'$route' (from, to) {
+		// 		console.log(this.name);
+		// 		var id = this.name;
+		// 		var shown = [];
+		// 		for (var i =0; i < this.games.length; i++) {
+		// 			if (id == "*" || this.games[i].title.match(".*"+id+".*")) {
+		// 				shown.push(this.games[i]);
+		// 			}
+		// 		}
+		// 		this.$set("shown", shown);
+		// 	}
+		// },
+
 		data: function () {
 			return {
-				games: []
+				games: [],
+				levelOptions: [
+					{
+						name: "ALL",
+						active: true
+					},
+					{
+						name: "NORMAL",
+						active: false
+					},
+					{
+						name: "HARD",
+						active: false
+					},
+					{
+						name: "INSANE",
+						active: false
+					},
+				],
+				categoryOptions: [
+					{
+						name: "ALL",
+						active: true
+					},
+					{
+						name: "Data Type",
+						active: false
+					},
+					{
+						name: "Theory",
+						active: false
+					},
+					{
+						name: "Logic",
+						active: false
+					}
+				]
 			};
+		},
+
+		methods: {
+			select:function (el) {
+				if (el.title == "LEVEL") {
+					for (var i of this.levelOptions) {
+						if (i.name == el.opt.name) {
+							i.active = el.opt.active;
+							break;
+						}
+					}
+				} else {
+					for (var i of this.categoryOptions) {
+						if (i.name == el.opt.name) {
+							i.active = el.opt.active;
+							break;
+						}
+					}
+				}
+			}
 		},
 
 		mounted: function () {
 			for (var i =0; i < 10; i++) {
 				var n = "game "+i;
-				if (this.name == "*" || n.match(".*"+this.name+".*"))
-					this.games.push({
-						title: "game "+i,
-						url: i,
-						thumbnail: "https://storage.googleapis.com/bytehunter_images/flood-fill.jpg"
-					})
+				this.games.push({
+					title: "game "+i,
+					level: i < 5 ? "NORMAL":"HARD",
+					categories: ["Data Type"],
+					url: i,
+					thumbnail: "https://storage.googleapis.com/bytehunter_images/flood-fill.jpg"
+				});
+				// if (this.name == "*" || n.match(".*"+this.name+".*")) {
+				// 	this.shown.push(this.games[i]);
+				// }
 			}
 		}
 	};

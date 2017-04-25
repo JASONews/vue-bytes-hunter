@@ -4,14 +4,16 @@ import Vue 			from 'vue'
 import App 			from './App'
 import Game 		from './components/Game'
 import Home 		from './components/Home'
-import Ranking		from './components/Ranking'
-import NormalRank	from './components/NormalRank'
-import HardRank	from './components/HardRank'
-import InsaneRank from './components/InsaneRank'
+import Ranking		from './components/ranking/Rank'
+import NormalRank	from './components/ranking/NormalRank'
+import HardRank	from './components/ranking/HardRank'
+import InsaneRank from './components/ranking/InsaneRank'
 import GameList		from './components/GameList'
-import UserProfile	from './components/UserProfile'
-import UserSettings from './components/UserSettings'
-import mainCSS		from './CSS/bytes-hunter.css'
+import UserProfile	from './components/user/UserProfile'
+import UserSettings from './components/user/UserSettings'
+
+import NotFound from "./components/NotFound"
+// import mainCSS		from './CSS/bytes-hunter.css'
 
 import VueRouter 	from 'vue-router'
 import VueResource 	from 'vue-resource'
@@ -20,6 +22,7 @@ Vue.use(VueResource)
 Vue.use(VueRouter)
 
 const router = new VueRouter({
+	mode: "history",
 	routes: [
 		{ path: '/', component: Home},
 		{ path: '/home', component: Home},
@@ -34,7 +37,7 @@ const router = new VueRouter({
 		{ path: '/user-profile', component: UserProfile},
 		{ path: '/user-settings', component: UserSettings},
 		{ path: '/game/:id', name: "game", component: Game, props: true},
-		{ path: '*', redirect: '/'}
+		{ path: '*', component: NotFound}
 	],
 	mode: 'history'
 })
@@ -45,7 +48,13 @@ var bus = new Vue({});
 const app = new Vue({
 	router,
 	data: {
-		bus: bus
+		bus: bus,
+		online: false,
+		user: null
 	},
 	render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');
+window.onSignIn = function(gu) {
+	console.log(gu);
+	app.bus.$emit("signin", gu);
+};

@@ -8,7 +8,7 @@ function ListItem(desc, startDate, endDate, isCompleted, order) {
 
 var userid;
 
-function onSignIn(googleUser) {
+function oSignIn(googleUser) {
     // Useful data for your client-side scripts:
     // console.log("onSignIn");
     // var event = new CustomEvent('signinsuccess', { 'detail': googleUser });
@@ -30,6 +30,7 @@ function onSignIn(googleUser) {
     // console.log("ID Token: " + id_token);
     window.googleUser = googleUser;
     $("#toogleBtn").trigger("click");
+    // app.bus.$emit("signin", "haha");
     // $.post("/account/auth", {id_token: id_token}, function (res) {
     //     console.log(res);
     //     window.location = "/";

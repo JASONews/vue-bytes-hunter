@@ -3,7 +3,7 @@
     <div class="thumbnail">
       <router-link :to="gameSrc">
         <a>
-          <img :src="thumbnailSrc" alt="">
+          <img :src="thumbnailSrc" alt="" class="rounded" width="200" height="200">
           <p>{{gameTitle}}</p>
         </a>
       </router-link>
