@@ -58,3 +58,4 @@ window.onSignIn = function(gu) {
 	console.log(gu);
 	app.bus.$emit("signin", gu);
 };
+window.vue = app;

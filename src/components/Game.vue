@@ -120,6 +120,10 @@ module.exports = {
         this.loadScript(this.cdn+this.id, "phaserGameMount");
     }
 
+    this.$root.bus.$on("gameFinish", function (data) {
+      console.log("score is "+data);
+    });
+
 		// window.disqus_config = function() {
 			// window.page.url= windows.location.origin; // Replace PAGE_URL with your page's canonical URL variable
 			// window.page.identifier= windows.location.pathname; // Replace PAGE_IDENTIFIER with your page's unique identifier variable

@@ -21,6 +21,7 @@ var cursors;
 var stars;
 var score = 0;
 var scoreText;
+var fin = false;
 
 function create() {
 
@@ -96,6 +97,11 @@ function create() {
 
 function update() {
 
+  if (score == 120 && !fin) {
+    finish();
+    fin = true;
+  }
+
   // this.game.scale.pageAlignHorizontally = true;
   // this.game.scale.pageAlignVertically = true;
   // this.game.scale.refresh();
@@ -148,4 +154,9 @@ function collectStar (player, star) {
   score += 10;
   scoreText.text = 'Score: ' + score;
 
+}
+
+function finish() {
+  var vue = window.vue;
+  vue.bus.$emit("gameFinish", score);
 }

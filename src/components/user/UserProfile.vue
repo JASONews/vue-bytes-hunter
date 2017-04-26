@@ -31,9 +31,9 @@
                     <input type="text" class="form-control" id="avatarurl" v-model="avatar1">
                   </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" @click="updateAvatar" data-dissmiss="modal" class="btn btn-default">OK</button>
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <div class="modal-footer text-center">
+                  <button type="button" @click="updateAvatar" data-dissmiss="modal" class="btn btn-outline-success">OK</button>
+                  <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
                 </div>
               </div>
             </div>
@@ -77,6 +77,8 @@
 
   import gameCard from "./gameCard"
 
+  const axios = require("axios");
+
   export default {
     components: {
       gameCard
@@ -100,9 +102,25 @@
       //   this.lastTimeLogin = json.lastTimeLogin;
       //   this.score = json.score;
       // })
+
+      if (!DEV) {
+
+        axios.get("/user/history", {
+          params: {
+            userid: this.$root.user.userid
+          }
+        }).then(function (res) {
+
+
+        }).catch(function (err) {
+
+        });
+      }
+
       this.games.push(1,2,3,4,5);
       this.avatar = this.$root.user.thumbnail;
       this.avatar1 = this.avatar;
+
     },
 
     methods: {
