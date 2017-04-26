@@ -8,7 +8,7 @@ import Ranking		from './components/ranking/Rank'
 import NormalRank	from './components/ranking/NormalRank'
 import HardRank	from './components/ranking/HardRank'
 import InsaneRank from './components/ranking/InsaneRank'
-import GameList		from './components/GameList'
+import GameList		from './components/search/GameList'
 import UserProfile	from './components/user/UserProfile'
 import UserSettings from './components/user/UserSettings'
 
@@ -33,7 +33,7 @@ const router = new VueRouter({
 					{ path: 'hard', component: HardRank},
 					{ path: 'insame', component: InsaneRank}
 				]},
-		{ path: '/game-list/:name', name: "game-list", component: GameList, props: true},
+		{ path: '/game-list/:name?', name: "game-list", component: GameList, props: true},
 		{ path: '/user-profile', component: UserProfile},
 		{ path: '/user-settings', component: UserSettings},
 		{ path: '/game/:id', name: "game", component: Game, props: true},

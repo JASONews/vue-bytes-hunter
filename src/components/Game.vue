@@ -2,21 +2,23 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<div id="gameView">
+        <div id="phaserMount"></div>
+				<div id="gameView" class="m-3 text-center">
 				</div>
+        <div id="phaserGameMount"></div>
 			</div>
 		</div>
 			<!-- <img id="gameimg" src="https://storage.googleapis.com/bytehunter_images/game-img01.png" alt="flood-fill"> -->
-		<div class="row">
-			<div class="col">
-				<label for="fav">fav</label>
-				<input type="checkbox" id='fav'>
-				<div v-if="online" class='row'>
-					<div class="btn-group">
-						<router-link tag="a" :to="prev" type="button" class="btn btn-default">Prev</router-link>
-						<router-link tag="a" :to="next" type="button" class="btn btn-default">Next</router-link>
-					</div>
-				</div>
+		<div class="row m-3 text-center">
+			<div class="col-2">
+						<router-link tag="button" :to="prev" type="button" class="btn btn-primary">Prev</router-link>
+      </div>
+      <div class="col-8 my-auto">
+        <label for="fav">fav</label>
+        <input type="checkbox" id='fav'>
+      </div>
+      <div class="col-2">
+          <router-link tag="button" :to="next" type="button" class="btn btn-secondary">Next</router-link>
 			</div>
 		</div>
 
@@ -47,6 +49,7 @@ module.exports = {
 
 	data: function() {
 	 return {
+      cdn: "/static/js/",
 		 	disqus_config: function() {
 		 		this.page.url= windows.location; // Replace PAGE_URL with your page's canonical URL variable
 		 		this.page.identifier= windows.location; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
@@ -70,6 +73,13 @@ module.exports = {
 	},
 
 	methods: {
+	    loadScript: function (src, mountId) {
+        var d = document
+        var s = d.createElement('script');
+        s.src = src;
+        s.async = false;
+        d.getElementById(mountId).appendChild(s);
+      }
 	},
 
 	watch: {
@@ -82,6 +92,13 @@ module.exports = {
 			    // this.page.url = window.location.origin;
 			  }
 			});
+      $("#gameView").empty();
+      $("#phaserGameMount").empty();
+      if (DEV) {
+        this.loadScript("/static/js/testgame.js", "phaserGameMount");
+      } else {
+        this.loadScript(this.cdn+this.id, "phaserGameMount");
+      }
 		}
 	},
 
@@ -92,6 +109,17 @@ module.exports = {
 
 		s.setAttribute('data-timestamp', +new Date());
 		(d.head || d.body).appendChild(s);
+
+		//Phaser Lib
+    this.loadScript("https://cdnjs.cloudflare.com/ajax/libs/phaser/2.6.2/phaser.js", "phaserMount");
+
+		// Game script
+    if (DEV) {
+      this.loadScript("/static/js/testgame.js", "phaserGameMount");
+    } else {
+        this.loadScript(this.cdn+this.id, "phaserGameMount");
+    }
+
 		// window.disqus_config = function() {
 			// window.page.url= windows.location.origin; // Replace PAGE_URL with your page's canonical URL variable
 			// window.page.identifier= windows.location.pathname; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
@@ -108,4 +136,9 @@ module.exports = {
 	width: 1150px;
 	height: 75%;
 }
+
+canvas {
+  margin: auto;
+}
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="wrapper">
+  <div id="wrapper" class="h-100">
     <bh-nav></bh-nav>
       <div>
         <router-view></router-view>
@@ -30,7 +30,6 @@
 
 <script>
 
-const axios = require('axios');
 
 import bhNav from './components/bhNav'
 

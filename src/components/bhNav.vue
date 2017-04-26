@@ -8,15 +8,15 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul v-if="online" class="navbar-nav">
               <li class="nav-item">
-                <router-link tag="a" class="nav-link" to="/game-list/*">GAMES</router-link>
+                <router-link tag="a" class="nav-link" to="/game-list">GAMES</router-link>
               </li>
               <li class="nav-item">
                 <router-link tag="a" class="nav-link" to="/ranking">RANKING</router-link>
               </li>
-              <form v-if="online" class="form-inline my-2 my-lg-0">
+              <!-- <form v-if="online" class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" v-model="searchInput">
                 <button @click.prevent="submitSearch" class="btn btn-outline-success my-2 my-sm-0">Search</button>
-              </form>
+              </form> -->
             </ul>
 
             <!-- <form v-if="online" class="navbar-form navbar-left">
@@ -67,18 +67,24 @@ module.exports = {
     }
   },
 
+  watch: {
+    '$route' (from, to) {
+      if(to.fullPath != "/" && this.$root.online == false) {
+        this.$router.push("/");
+      }
+    }
+  },
+
   mounted: function () {
     this.$root.bus.$on("signin", this.signIn);
   },
 
   methods: {
 
-    submitSearch: function () {
-      console.log(this.searchInput);
-      this.$router.push("/game-list/"+this.searchInput);
-
-
-    },
+    // submitSearch: function () {
+    //   console.log(this.searchInput);
+    //   this.$router.push("/game-list/"+this.searchInput);
+    // },
 
     signIn: function(gu) {
       var googleUser = gu;

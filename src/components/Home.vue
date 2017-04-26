@@ -1,10 +1,12 @@
 <template>
 <div>
-  <div class="jumbotron jumbotron-fluid">
-    <div class="container text-center">
+  <div class="jumbotron jumbotron-fluid h-100">
+    <div class="container text-center h-100">
         <h2>Welcome to the World of Bytes Hunters</h2>
         <br/>
+        <div id="phaserMount"></div>
         <div id="gameView"></div>
+        <div id="phaserGameMount"></div>
         <!-- <h4><a href="/game/1">Get Started</a></h4> -->
     </div>
   </div>
@@ -34,3 +36,35 @@
   </div> -->
 </div>
 </template>
+
+<script>
+
+  module.exports = {
+    mounted: function () {
+      this.loadScript("https://cdnjs.cloudflare.com/ajax/libs/phaser/2.6.2/phaser.js", "phaserMount");
+
+      // Game script
+      if (DEV) {
+        this.loadScript("/static/js/testgame.js", "phaserGameMount");
+      }
+    },
+
+    methods: {
+      loadScript: function (src, mountId) {
+        var d = document
+        var s = d.createElement('script');
+        s.src = src;
+        s.async = false;
+        d.getElementById(mountId).appendChild(s);
+      }
+    }
+
+  };
+
+</script>
+
+<style lang="css">
+ canvas {
+   margin: auto;
+ }
+</style>
