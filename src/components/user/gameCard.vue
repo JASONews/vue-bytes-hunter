@@ -9,7 +9,7 @@
       </div>
 
     </div>
-    <div class="col-1 ml-2 pr-0 dash-left" style="opacity: .5;">
+    <div class="col-1 ml-2 pr-0 dash-left" >
       <div class=" h-50"><i class="fa fa-caret-right caret fa-2x" aria-hidden="true"></i>
         <!--<p class="w-100 align-b timeline-text">{{lastUpdate}}</p>-->
       </div>
@@ -48,7 +48,10 @@ module.exports = {
 }
 </script>
 
-<style lang="css">
+<style lang="stylus">
+
+lightgreen-50 = rgba(144,238,144, 0.5)
+
 .game-card-img {
   max-height: 200px;
   max-width: 200px;
@@ -56,7 +59,7 @@ module.exports = {
 .dash-left {
   /*border-left: dashed;*/
   border-left-width: 0.2em;
-  border-left-color: lightgreen;
+  border-left-color: lightgreen-50;
   border-left-style: solid;
 }
 .dash-bottom {
@@ -103,7 +106,7 @@ module.exports = {
   position: absolute;
   top: 50%;
   left: 0em;
-  color: lightgreen;
+  color: lightgreen-50;
 }
 
 .dash-right {
