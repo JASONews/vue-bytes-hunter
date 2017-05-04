@@ -2,18 +2,14 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue 			from 'vue'
 import App 			from './App'
-import Game 		from './components/Game'
 import Home 		from './components/Home'
-import Ranking		from './components/ranking/Rank'
-import NormalRank	from './components/ranking/NormalRank'
-import HardRank	from './components/ranking/HardRank'
-import InsaneRank from './components/ranking/InsaneRank'
+import Game 		from './components/game/Game'
 import GameList		from './components/search/GameList'
+import Ranking		from './components/ranking/Rank'
 import UserProfile	from './components/user/UserProfile'
 import UserSettings from './components/user/UserSettings'
 
 import NotFound from "./components/NotFound"
-// import mainCSS		from './CSS/bytes-hunter.css'
 
 import VueRouter 	from 'vue-router'
 import VueResource 	from 'vue-resource'
@@ -26,13 +22,7 @@ const router = new VueRouter({
 	routes: [
 		{ path: '/', component: Home},
 		{ path: '/home', component: Home},
-		{ path: '/ranking', component: Ranking,
-		children: [
-					{ path: '', component: NormalRank},
-					{ path: 'normal', component: NormalRank},
-					{ path: 'hard', component: HardRank},
-					{ path: 'insame', component: InsaneRank}
-				]},
+		{ path: '/ranking', component: Ranking},
 		{ path: '/game-list/:name?', name: "game-list", component: GameList, props: true},
 		{ path: '/user-profile', component: UserProfile},
 		{ path: '/user-settings', component: UserSettings},
@@ -50,7 +40,9 @@ const app = new Vue({
 	data: {
 		bus: bus,
 		online: false,
-		user: null
+		user: null,
+		games: null,
+		currentGame: null
 	},
 	render: h => h(App)
 }).$mount('#app');

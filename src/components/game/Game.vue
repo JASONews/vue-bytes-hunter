@@ -43,6 +43,9 @@
 				this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
 		};
 		*/
+
+const axios = require('axios');
+
 module.exports = {
 
 	props: ["id"],
@@ -94,11 +97,7 @@ module.exports = {
 			});
       $("#gameView").empty();
       $("#phaserGameMount").empty();
-      if (DEV) {
-        this.loadScript("/static/js/testgame.js", "phaserGameMount");
-      } else {
-        this.loadScript(this.cdn+this.id, "phaserGameMount");
-      }
+			this.loadScript(this.$root.currentGame.url, "phaserGameMount");
 		}
 	},
 
@@ -117,17 +116,30 @@ module.exports = {
     if (DEV) {
       this.loadScript("/static/js/testgame.js", "phaserGameMount");
     } else {
-        this.loadScript(this.cdn+this.id, "phaserGameMount");
+			// load game info
+			this.loadScript(this.cdn+this.id, "phaserGameMount");
     }
 
+		//TODO: prvent events cascade
     this.$root.bus.$on("gameFinish", function (data) {
       console.log("score is "+data);
-    });
+			axios.post("/game/"+this.id+"/save", (function () {
+				return {
+					uid: this.$root.user.userid,
+					gid: this.id,
+					date: new Date(),
+					score: data
+				}
+			})()).then(function (res) {
 
+			}).catch(function (err) {
+
+			});
+		});
 		// window.disqus_config = function() {
-			// window.page.url= windows.location.origin; // Replace PAGE_URL with your page's canonical URL variable
-			// window.page.identifier= windows.location.pathname; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-	//  };
+		// window.page.url= windows.location.origin; // Replace PAGE_URL with your page's canonical URL variable
+		// window.page.identifier= windows.location.pathname; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+		//  };
 	}
 };
 
@@ -142,7 +154,7 @@ module.exports = {
 }
 
 canvas {
-  margin: auto;
+	margin: auto;
 }
 
 </style>

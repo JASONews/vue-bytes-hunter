@@ -1,7 +1,7 @@
 <template>
-  <div id="wrapper" class="h-100">
+  <div id="wrapper">
     <bh-nav></bh-nav>
-      <div>
+      <div class="h-100">
         <router-view></router-view>
       </div>
     <!-- Modal -->
@@ -51,3 +51,11 @@ module.exports = {
 
 
 </script>
+
+<style lang="css">
+  #wrapper {
+    height: 95%;
+  }
+  html body {
+  }
+</style>

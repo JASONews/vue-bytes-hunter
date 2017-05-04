@@ -23,4 +23,4 @@
     </div>
 </template>
 
-<script src="./user-settings.js"></script>
+<!-- <script src="./user-settings.js"></script> -->

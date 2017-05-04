@@ -5,7 +5,7 @@
         <p class="w-100 align-b w-100 pr-4 mb-1">{{date}}</p>
       </div>
       <div class="h-50">
-        <p class="w-100">{{lastUpdate}}</p>
+        <p class="w-100">{{time}}</p>
       </div>
 
     </div>
@@ -18,15 +18,15 @@
       </div>
     </div>
     <div class="col-3 timeline-game-image mt-5 ml-2 mb-3 game-card">
-      <router-link tag="a" :to="gameSrc">
-        <img class="mt-4 mb-4" :src="thumbnailSrc" width="100" height="100">
+      <router-link tag="a" :to="gamePage">
+        <img class="mt-4 mb-4" :src="score.game.thumbnail" width="100" height="100">
       </router-link>
     </div>
     <div class="col-4 timeline-game-image mt-5 mb-3">
       <div class="h-100 timeline-game-info mr-4 mt-4 mb-4">
         <p class="my-auto align-l">
-          <router-link tag="a" :to="gameSrc" class=""><h3>{{gameTitle}}</h3></router-link><br/>
-          <p class="align-l">Short descripton here</p>
+          <a href="#" @click.prevent="updateGame" class=""><h3>{{score.game.name}}</h3></a><br/>
+          <p class="align-l">{{score.game.description}}</p>
         </p>
       </div>
     </div>
@@ -35,14 +35,27 @@
 
 <script>
 module.exports = {
-  props: ["gameSrc", "gameTitle", "lastUpdate", "thumbnailSrc"],
+  props: ["score"],
   data: function () {
     return {
     }
   },
   computed: {
     date: function () {
-      return new Date().toLocaleDateString().split("/").slice(0,2).join("/");
+      return this.score.date.toLocaleDateString();
+    },
+    time: function () {
+      return this.score.date.toLocaleTimeString();
+    },
+    gamePage: function () {
+      return "/game/"+this.score.gid;
+    }
+  },
+
+  methods: {
+    updateGame: function () {
+      this.$root.currentGame = this.score.game;
+      this.$router.push(this.gamePage);
     }
   }
 }
@@ -102,6 +115,7 @@ lightgreen-50 = rgba(144,238,144, 0.5)
 .align-l {
   text-align: right;
 }
+
 .caret {
   position: absolute;
   top: 50%;

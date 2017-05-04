@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  props: ["options", "title"],
+  props: ["options", "title", "single"],
 
   methods: {
     update: function (el) {
@@ -20,6 +20,19 @@ export default {
         title: this.title,
         opt: el
       });
+
+      if (this.single) {
+        for (var i of this.options) {
+          if (i.name != el.name) {
+            i.active = false;
+            this.$emit("selected", {
+              title: this.title,
+              opt: i
+            });
+          }
+        }
+        return;
+      }
 
       if (el.name == "ALL") {
         for (var i of this.options) {

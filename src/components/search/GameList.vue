@@ -8,7 +8,7 @@
         <div class="row">
           <!-- Level of difficulty-->
           <div class="col">
-            <list-component :options="levelOptions" @selected="select" title="LEVEL"></list-component>
+            <list-component :options="levelOptions" single="false" @selected="select" title="LEVEL"></list-component>
           </div>
         </div>
 
@@ -16,7 +16,7 @@
         <div class="row my-auto">
           <!-- Category -->
           <div class="col">
-            <list-component :options="categoryOptions" @selected="select" title="CATEGORY"></list-component>
+            <list-component :options="categoryOptions" single="false"  @selected="select" title="CATEGORY"></list-component>
           </div>
 
         </div>
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="row text-center">
-          <search-card v-for="game in shown" :game-src="'/game/'+game.url" :game-title="game.name" :thumbnail-src="game.thumbnail"></search-card>
+          <search-card v-for="game in shown" :game="game" :game-src="'/game/'+game.url" :game-title="game.name" :thumbnail-src="game.thumbnail"></search-card>
         </div>
       </div>
     </div>
@@ -77,7 +77,7 @@
             return true;
           }
           for (var i of self.levelOptions) {
-            if (i.active && e.level == self.levelTransform(i.name)) {
+            if (i.active && e.difficulty.toLowerCase() == i.name.toLowerCase()) {
               return true;
             }
           }
@@ -87,7 +87,7 @@
             return true;
           }
           for (var i of self.categoryOptions) {
-            if (i.active && e.categories.split(",").includes(i.name)) {
+            if (i.active && e.categories.split(",").map(x => x.toLowerCase()).includes(i.name.toLowerCase())) {
               return true;
             }
           }
@@ -176,10 +176,11 @@
         for (var i =0; i < 10; i++) {
           var n = "game "+i;
           this.games.push({
+            gid: i,
             name: "game "+i,
-            level: i < 5 ? 1 : 2,
-            categories: "Data Type",
-            url: i,
+            difficulty: i < 5 ? "normal" : (i >= 8 ? "insane" : "hard"),
+            categories: i < 5  ? "Data Type" : "theory",
+            url: "/static/js/testgame.js",
             thumbnail: "https://storage.googleapis.com/bytehunter_images/flood-fill.jpg"
           });
         }
@@ -187,6 +188,7 @@
         var self = this;
         axios.get("/search/games").then(function (games) {
           self.$set(self.games,games);
+          self.$root.games = games;
         });
       }
     }

@@ -13,18 +13,7 @@
               <li class="nav-item">
                 <router-link tag="a" class="nav-link" to="/ranking">RANKING</router-link>
               </li>
-              <!-- <form v-if="online" class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" v-model="searchInput">
-                <button @click.prevent="submitSearch" class="btn btn-outline-success my-2 my-sm-0">Search</button>
-              </form> -->
             </ul>
-
-            <!-- <form v-if="online" class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search" v-model="searchInput"/>
-                </div>
-                <button @click.prevent="submitSearch" class="btn btn-default">Search</button>
-            </form> -->
               <ul class="navbar-nav ml-auto">
                   <li class="nav-item">
                     <template v-if="online">
@@ -39,13 +28,11 @@
                     <router-link v-if="online" tag="a" class="nav-link" to="/user-profile"><a>{{this.$root.user.preferredName}} <i class="fa fa-user-circle" aria-hidden="true"></i></a></router-link>
                   </li>
               </ul>
-
         </div>
       </div>
       <div id="loginBtn" class="g-signin2 googlelogin" data-onsuccess="onSignIn" hidden="true"></div>
       <div id="toogleBtn" @click='signIn' hidden="true"></div>
     </nav>
-
 </template>
 
 <script type="text/javascript">
@@ -55,8 +42,6 @@ const axios = require('axios');
 module.exports = {
   data: function () {
     return {
-      // online: false,
-      // user: {},
       searchInput: ""
     };
   },
@@ -81,11 +66,6 @@ module.exports = {
 
   methods: {
 
-    // submitSearch: function () {
-    //   console.log(this.searchInput);
-    //   this.$router.push("/game-list/"+this.searchInput);
-    // },
-
     signIn: function(gu) {
       var googleUser = gu;
       var profile = googleUser.getBasicProfile();
@@ -104,29 +84,33 @@ module.exports = {
       console.log("ID Token: " + id_token);
       var that = this;
 
-      if (!DEV) {
-      axios.post("/account/auth", id_token)
-        .then(function (res) {
-          if (res.status < 300 ) {
-            var u = res.data;
-            that.$root.user = u;
-            that.$root.online = true;
-          }
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
+      if (DEV) {
 
-      } else {
         that.$root.user = {
           preferredName: profile.getName(),
-          userid: userid,
+          id: userid,
           id_token: id_token,
           thumbnail: profile.getImageUrl(),
           email: profile.getEmail(),
-          lastTimeLogin: Date.now()
+          lastTimeLogin: Date.now(),
+          activities: [],
+          awards: []
         };
         that.$root.online = true;
+
+      } else {
+
+        axios.post("/account/auth", id_token)
+          .then(function (res) {
+            if (res.status < 300 ) {
+              var u = res.data;
+              that.$root.user = u;
+              that.$root.online = true;
+            }
+          })
+          .catch(function (err) {
+            console.log(err);
+          });
       }
     },
     signOut: function() {
