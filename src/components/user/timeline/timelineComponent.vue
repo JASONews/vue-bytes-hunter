@@ -46,12 +46,13 @@ module.exports = {
         }
       });
     } else {
+      var self = this;
       axios.get("/user/history", {
         params: {
-          userid: this.$root.user.userid
+          userid: this.$root.user.id
         }
       }, ).then(function (res) {
-        this.scores = this.mergeGamesAndScores(res.games, res.scores);
+        self.scores = self.mergeGamesAndScores(res.games, res.scores);
       }).catch(function (err) {
         console.log(err);
       });
@@ -70,6 +71,7 @@ module.exports = {
         for (var game of games) {
           if (score.gid == game.gid) {
             score.game = game;
+            break;
           }
         }
       }

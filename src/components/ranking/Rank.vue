@@ -24,6 +24,8 @@
   import listComponent from "../search/listComponent"
   import rankTable from "./rankTable"
 
+  const axios = require('axios');
+
   module.exports = {
 
     components: {
@@ -121,6 +123,12 @@
             score: 100
           }]
         ]
+      } else {
+        var self = this;
+        axios.all([axios.get("/rank/normal"), axios.get("/rank/hard"), axios.get("/rank/insane")])
+        .then(axios.spread(function (normalRank, hardRank, insaneRank) {
+          self.rankUsers.push(normalRank.data, hardRank.data, insaneRank.data);
+        }));
       }
     }
   };

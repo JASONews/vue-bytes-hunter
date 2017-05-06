@@ -1,6 +1,6 @@
 <template>
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-      <div class="container">
+    <nav id="globalNavbar" :class="['navbar navbar-toggleable-md bg-faded', lightScheme ? 'navbar-light' : ' navbar-inverse bg-inverse']">
+      <div class="container w-100">
         <button type="button" class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="#myNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -42,7 +42,8 @@ const axios = require('axios');
 module.exports = {
   data: function () {
     return {
-      searchInput: ""
+      searchInput: "",
+      lightScheme: true
     };
   },
 
@@ -53,9 +54,14 @@ module.exports = {
   },
 
   watch: {
-    '$route' (from, to) {
+    '$route' (to, from) {
       if(to.fullPath != "/" && this.$root.online == false) {
         this.$router.push("/");
+      }
+      if (to.fullPath.split("/")[1] == "game") {
+        this.lightScheme = false;
+      } else {
+        this.lightScheme = true;
       }
     }
   },
@@ -94,7 +100,11 @@ module.exports = {
           email: profile.getEmail(),
           lastTimeLogin: Date.now(),
           activities: [],
-          awards: []
+          awards: [],
+          normalScore: 100,
+          hardScore: 50,
+          insaneScore: 1000,
+          likedGames: []
         };
         that.$root.online = true;
 

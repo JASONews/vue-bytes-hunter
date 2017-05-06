@@ -1,5 +1,5 @@
 <template>
-  <div class="container h-100">
+  <div class="container-fluid h-100">
     <div class="row h-100">
       <div class="col-3 mr-2 profile-divider h-100 profileLeft">
         <profile-left></profile-left>

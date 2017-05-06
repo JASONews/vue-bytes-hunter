@@ -15,7 +15,7 @@
           </thead>
 
           <tbody>
-          <tr v-for="(user, index) in rankUsers" v-if="users.length>0" :class="{'table-danger': index == 0}">
+          <tr v-for="(user, index) in rankUsers" v-if="users.length>0" :class="">
               <th scope="row">{{index + 1}}</th>
               <td>{{user.name}}</td>
               <td>{{user.score}}</td>

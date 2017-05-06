@@ -1,6 +1,6 @@
 <template>
-	<div class="container">
-		<div class="row">
+	<div class="container h-100 w-100 pl-0 pr-0">
+		<div class="row w-100 h-100 mr-0 ml-0 gameBackground">
 			<div class="col">
         <div id="phaserMount"></div>
 				<div id="gameView" class="m-3 text-center">
@@ -10,43 +10,43 @@
 		</div>
 			<!-- <img id="gameimg" src="https://storage.googleapis.com/bytehunter_images/game-img01.png" alt="flood-fill"> -->
 		<div class="row m-3 text-center">
-			<div class="col-2">
-						<router-link tag="button" :to="prev" type="button" class="btn btn-primary">Prev</router-link>
+			<div class="col-4">
       </div>
-      <div class="col-8 my-auto">
-        <label for="fav">fav</label>
-        <input type="checkbox" id='fav'>
+      <div class="col-4 my-auto">
+				<div class="btn-group">
+					<router-link tag="button" :to="prev" type="button" class="btn btn-primary">Prev</router-link>
+					<a @click="like" class="btn btn-secondary"><i :class="['fa text-danger', isLike ? 'fa-heart' : 'fa-heart-o']" aria-hidden="true"></i></a>
+					<router-link tag="button" :to="next" type="button" class="btn btn-success">Next</router-link>
+				</div>
       </div>
-      <div class="col-2">
-          <router-link tag="button" :to="next" type="button" class="btn btn-secondary">Next</router-link>
+      <div class="col-4">
+				<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#bugModal">Bug Report</button>
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row pr-5 pl-5">
 			<div class="col">
 				<div id="disqus_thread"></div>
 			</div>
 		</div>
+
+		<bug-report :gid="id"></bug-report>
 
 	</div>
 
 </template>
 
 <script>
-		/**
-		 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-		 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-		 */
-		/*
-		var disqus_config = function () {
-				this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-				this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-		};
-		*/
+
+import bugReport from "./bugReport";
 
 const axios = require('axios');
 
 module.exports = {
+
+	components: {
+		bugReport
+	},
 
 	props: ["id"],
 
@@ -56,7 +56,8 @@ module.exports = {
 		 	disqus_config: function() {
 		 		this.page.url= windows.location; // Replace PAGE_URL with your page's canonical URL variable
 		 		this.page.identifier= windows.location; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-		  }
+		  },
+			isLike: false
 			}
 	},
 
@@ -82,7 +83,33 @@ module.exports = {
         s.src = src;
         s.async = false;
         d.getElementById(mountId).appendChild(s);
-      }
+      },
+
+			like: function () {
+				if (DEV) {
+					this.isLike = !this.isLike;
+				} else {
+					axios.get("/user/like/"+this.id, function (res) {
+						if (res.status == "OK") {
+
+							this.isLike = !this.isLike;
+
+							if (this.isLike) {
+								this.$root.user.likedGames.push(this.id);
+							} else {
+								for (var i in this.$root.user.likedGame) {
+									if (this.$root.user.likedGame[i] == this.id) {
+										this.$root.user.likedGames.remove(i);
+										break;
+									}
+								}
+							}
+
+						}
+
+					});
+				}
+			}
 	},
 
 	watch: {
@@ -97,7 +124,11 @@ module.exports = {
 			});
       $("#gameView").empty();
       $("#phaserGameMount").empty();
-			this.loadScript(this.$root.currentGame.url, "phaserGameMount");
+			if (DEV) {
+				this.loadScript("/static/js/testgame.js", "phaserGameMount");
+			} else {
+				this.loadScript(this.$root.currentGame.url, "phaserGameMount");
+			}
 		}
 	},
 
@@ -111,13 +142,22 @@ module.exports = {
 
 		//Phaser Lib
     this.loadScript("https://cdnjs.cloudflare.com/ajax/libs/phaser/2.6.2/phaser.js", "phaserMount");
+		if (!this.$root.user) {
+			var self = this;
+			setTimeout(function () {
+				self.isLike = self.$root.user.likedGames.includes(this.id);
+			}, 2000);
+		} else {
+			this.isLike = this.$root.user.likedGames.includes(this.id);
+		}
+
 
 		// Game script
     if (DEV) {
       this.loadScript("/static/js/testgame.js", "phaserGameMount");
     } else {
 			// load game info
-			this.loadScript(this.cdn+this.id, "phaserGameMount");
+			this.loadScript(this.$root.currentGame.url, "phaserGameMount");
     }
 
 		//TODO: prvent events cascade
@@ -125,7 +165,7 @@ module.exports = {
       console.log("score is "+data);
 			axios.post("/game/"+this.id+"/save", (function () {
 				return {
-					uid: this.$root.user.userid,
+					uid: this.$root.user.id,
 					gid: this.id,
 					date: new Date(),
 					score: data
@@ -136,10 +176,6 @@ module.exports = {
 
 			});
 		});
-		// window.disqus_config = function() {
-		// window.page.url= windows.location.origin; // Replace PAGE_URL with your page's canonical URL variable
-		// window.page.identifier= windows.location.pathname; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-		//  };
 	}
 };
 
@@ -151,6 +187,10 @@ module.exports = {
 	padding-top: 40px;
 	width: 1150px;
 	height: 75%;
+}
+
+.gameBackground {
+	background-color: black;
 }
 
 canvas {

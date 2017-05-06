@@ -43,15 +43,15 @@
     <div class="row mt-5">
       <!-- Category -->
       <div class="col text-center mb-2">
-        <h3 class="rank-title">My Ranks</h3>
+        <h3 class="rank-title">My Scores</h3>
       </div>
     </div>
     <div class="row mt-3 pl-2 pr-2">
       <div class="col text-center my-auto">
         <div class="list-group user-rank">
-          <a class="list-group-item list-group-item-action">Normal</a>
-          <a class="list-group-item list-group-item-action">Hard</a>
-          <a class="list-group-item list-group-item-action">Insame</a>
+          <a class="list-group-item list-group-item-action justify-content-between">Normal<span class="badge badge-primary badge-pill">{{this.$root.user.normalScore}}</span></a>
+          <a class="list-group-item list-group-item-action justify-content-between">Hard<span class="badge badge-warning badge-pill">{{this.$root.user.hardScore}}</span></a>
+          <a class="list-group-item list-group-item-action justify-content-between">Insame<span class="badge badge-danger badge-pill">{{this.$root.user.insaneScore}}</span></a>
         </div>
       </div>
     </div>
