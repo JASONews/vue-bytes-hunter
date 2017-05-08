@@ -1,10 +1,14 @@
 <template>
-  <div class="container-fluid h-100">
-    <div class="row h-100">
-      <div class="col-3 mr-2 profile-divider h-100 profileLeft">
+  <div class="container-fluid h-100 p-0">
+    <div id="bg-cover" class="h-100 w-100">
+    </div>
+    <div class="row h-100 w-100">
+      <div class="col-3 h-100 profileLeft">
         <profile-left></profile-left>
       </div>
-      <div class="col-8 ml-2">
+      <div class="col-4 p-0">
+      </div>
+      <div class="col-7 p-0">
         <profile-right></profile-right>
       </div>
     </div>
@@ -44,7 +48,17 @@
   }
 
   .profileLeft {
-    background: linear-gradient(to bottom left, rgba(144,238,144, .5), rgba(255,255,0,.3));
+    background: linear-gradient(to bottom left, rgba(144,238,144, .5), rgba(255,255,0,.3)) white;
+    box-shadow: 5px 0 10px -1px rgba(0,0,0,0.2);
+    position: fixed;
+    z-index: 100;
+    top: 0px;
   }
 
+  #bg-cover {
+    position: fixed;
+    top: 0px;
+    background: linear-gradient(to bottom right, rgba(211,211,211,.3), rgba(100, 100, 100, .3)), url("/static/img/pw_pattern.png") repeat;
+    z-index: -100;
+  }
 </style>

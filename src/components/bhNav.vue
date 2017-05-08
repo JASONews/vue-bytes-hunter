@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
     <nav id="globalNavbar" :class="['navbar navbar-toggleable-md bg-faded', lightScheme ? 'navbar-light' : ' navbar-inverse bg-inverse']">
       <div class="container w-100">
         <button type="button" class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target="#myNavbar">
@@ -58,7 +58,7 @@ module.exports = {
       if(to.fullPath != "/" && this.$root.online == false) {
         this.$router.push("/");
       }
-      if (to.fullPath.split("/")[1] == "game") {
+      if (to.fullPath.split("/")[1] == "game" || to.fullPath.split("/")[1] == "" ) {
         this.lightScheme = false;
       } else {
         this.lightScheme = true;
@@ -68,6 +68,13 @@ module.exports = {
 
   mounted: function () {
     this.$root.bus.$on("signin", this.signIn);
+    const path = this.$router.history.current.fullPath.split("/")[1];
+    console.log(path);
+    if (path == "game" || path == "") {
+      this.lightScheme = false;
+    } else {
+      this.lightScheme = true;
+    }
   },
 
   methods: {
@@ -107,7 +114,7 @@ module.exports = {
           likedGames: []
         };
         that.$root.online = true;
-
+        this.afterSignIn();
       } else {
 
         axios.post("/account/auth", id_token)
@@ -116,6 +123,7 @@ module.exports = {
               var u = res.data;
               that.$root.user = u;
               that.$root.online = true;
+              that.afterSignIn();
             }
           })
           .catch(function (err) {
@@ -140,6 +148,12 @@ module.exports = {
     login: function () {
       console.log("clicked");
       $(".abcRioButton")[0].click();
+    },
+
+    afterSignIn: function () {
+      if (this.$router.currentRoute.fullPath.split("/")[1] == "") {
+        alert("Welcome to the ByteHunter " + this.$root.user.preferredName);
+      }
     }
   }
 };

@@ -26,6 +26,7 @@
       <div class="h-100 timeline-game-info mr-4 mt-4 mb-4">
         <p class="my-auto align-l">
           <a href="#" @click.prevent="updateGame" class=""><h3>{{score.game.name}}</h3></a><br/>
+          <p class="align-l"><a class="btn btn-outline-primary btn-sm category-tag" :href="'/game-list/'+tag" v-for="tag in score.game.categories.split(',')">{{tag}}</a></p><br/>
           <p class="align-l">{{score.game.description}}</p>
         </p>
       </div>
@@ -139,5 +140,9 @@ lightgreen-50 = rgba(144,238,144, 0.5)
 
 .timeline-date:hover {
   opacity: 1;
+}
+
+.category-tag {
+  margin: 2px;
 }
 </style>

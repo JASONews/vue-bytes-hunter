@@ -1,6 +1,6 @@
 <template>
   <div id="wrapper">
-    <bh-nav></bh-nav>
+    <bh-nav id="navHeader"></bh-nav>
       <div class="h-100">
         <router-view></router-view>
       </div>
@@ -57,5 +57,10 @@ module.exports = {
     height: 95%;
   }
   html body {
+  }
+
+  #navHeader {
+    z-index: 150;
+    box-shadow: 0px 2px 10px rgba(0,0,0,.2);
   }
 </style>

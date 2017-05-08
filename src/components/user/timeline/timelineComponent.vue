@@ -44,6 +44,60 @@ module.exports = {
           material: "data type material",
           description: " a data type game"
         }
+      },
+      {
+        level: 1,
+        difficulty: "normal",
+        gid: "1",
+        score: 100,
+        date: new Date(),
+        game: {
+          gid: "1",
+          name: "test game 1",
+          difficulty: "normal",
+          level: 1,
+          url: "/static/js/testgame.js",
+          categories: "data type,theory",
+          thumbnail: "/static/logo.png",
+          material: "data type material",
+          description: " a data type game"
+        }
+      },
+      {
+        level: 1,
+        difficulty: "normal",
+        gid: "1",
+        score: 100,
+        date: new Date(),
+        game: {
+          gid: "1",
+          name: "test game 1",
+          difficulty: "normal",
+          level: 1,
+          url: "/static/js/testgame.js",
+          categories: "data type,theory",
+          thumbnail: "/static/logo.png",
+          material: "data type material",
+          description: " a data type game"
+        }
+      },
+      {
+        level: 1,
+        difficulty: "normal",
+        gid: "1",
+        score: 100,
+        date: new Date(),
+        game: {
+          gid: "1",
+          name: "test game 1",
+          difficulty: "normal",
+          level: 1,
+          url: "/static/js/testgame.js",
+          categories: "data type,theory",
+          thumbnail: "/static/logo.png",
+          material: "data type material",
+          description: " a data type game"
+        }
       });
     } else {
       var self = this;

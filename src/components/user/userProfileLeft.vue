@@ -2,6 +2,8 @@
   <div class="">
     <br>
     <br>
+    <br>
+    <br>
     <div class="row m-1">
       <!-- Level of difficulty-->
       <div class="col">
@@ -12,15 +14,14 @@
         </div>
         <div class="row m-2">
           <div class="col text-center mt-2">
-            <button type="button" @click="beforeShown" data-toggle="modal" data-target="#avatarModal" class="btn btn-outline-success">Change Avatar</button>
+            <h2>{{this.$root.user.preferredName}}</h2>
           </div>
         </div>
 
       </div>
 
-      <div id="avatarModal" class="modal fade" role="dialog">
+      <!-- <div id="avatarModal" class="modal fade" role="dialog">
         <div class="modal-dialog">
-          <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-body">
               <div class="form-group">
@@ -37,7 +38,7 @@
 
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="row mt-5">
@@ -60,30 +61,27 @@
 
 <script>
 module.exports = {
-  data: function() {
-    return {
-      avatar: ""
-    }
-  },
-
-  methods: {
-    updateAvatar: function () {
-      this.$root.user.thumbnail = this.avatar;
-      $("#avatarModal").modal("hide");
-    },
-
-    beforeShown: function () {
-      if (this.$root.user)
-        this.avatar = this.$root.user.thumbnail;
-    }
-  }
+  // data: function() {
+  //   return {
+  //     avatar: ""
+  //   }
+  // },
+  //
+  // methods: {
+  //   updateAvatar: function () {
+  //     this.$root.user.thumbnail = this.avatar;
+  //     $("#avatarModal").modal("hide");
+  //   },
+  //
+  //   beforeShown: function () {
+  //     if (this.$root.user)
+  //       this.avatar = this.$root.user.thumbnail;
+  //   }
+  // }
 }
 </script>
 
 <style lang="css">
-.modal-btn-size{
-  width: 30%;
-}
 
 .user-rank {
 }
