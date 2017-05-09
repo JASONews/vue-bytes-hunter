@@ -2,7 +2,7 @@
 
     <div class="row mb-2">
       <div class="container text-center">
-        <game-card v-for="score in scores" :score="score"></game-card>
+        <game-card v-for="(score,index) in scores" :score="score" :index='index'></game-card>
       </div>
     </div>
 
@@ -42,20 +42,20 @@ module.exports = {
           categories: "data type,theory",
           thumbnail: "/static/logo.png",
           material: "data type material",
-          description: " a data type game"
+          description: " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt dictum enim, nec ullamcorper dui iaculis eu. Etiam est elit, egestas nec leo ut, ullamcorper congue enim. Fusce placerat justo ut congue feugiat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam pellentesque lorem justo, sit amet dignissim nulla ullamcorper in. Aliquam blandit purus vitae enim porta, et dictum massa mollis. Nunc mollis, elit non tincidunt elementum, arcu ipsum consequat lacus, quis porta erat lectus vitae elit. Integer a sem lacus. In ultricies lacinia mauris. Nullam leo diam, tincidunt id aliquet id, rutrum sed dolor.a data type game"
         }
       },
       {
-        level: 1,
-        difficulty: "normal",
-        gid: "1",
+        level: 3,
+        difficulty: "hard",
+        gid: "2",
         score: 100,
         date: new Date(),
         game: {
-          gid: "1",
+          gid: "2",
           name: "test game 1",
-          difficulty: "normal",
-          level: 1,
+          difficulty: "hard",
+          level: 3,
           url: "/static/js/testgame.js",
           categories: "data type,theory",
           thumbnail: "/static/logo.png",
@@ -64,16 +64,16 @@ module.exports = {
         }
       },
       {
-        level: 1,
-        difficulty: "normal",
-        gid: "1",
+        level: 5,
+        difficulty: "insane",
+        gid: "3",
         score: 100,
         date: new Date(),
         game: {
-          gid: "1",
+          gid: "3",
           name: "test game 1",
-          difficulty: "normal",
-          level: 1,
+          difficulty: "insane",
+          level: 5,
           url: "/static/js/testgame.js",
           categories: "data type,theory",
           thumbnail: "/static/logo.png",

@@ -67,7 +67,8 @@
           regex+=".*";
         }
         for (var i =0; i < this.games.length; i++) {
-          if (this.games[i].name.match(regex) || this.games[i].categories.toLowerCase().match(regex)) {
+          if (this.games[i].name.match(regex) || this.games[i].categories.toLowerCase().match(regex) ||
+        this.games[i].difficulty.match(regex)) {
             showns.push(this.games[i]);
           }
         }
@@ -172,7 +173,7 @@
     },
 
     mounted: function () {
-      this.searchInput = this.name;
+      this.searchInput = this.name ? this.name : "";
       if (DEV) {
         for (var i =0; i < 10; i++) {
           var n = "game "+i;
